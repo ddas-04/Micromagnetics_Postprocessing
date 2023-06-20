@@ -1,0 +1,5 @@
+Keep both mx3 file and the non_interactive_mumax3 file in the same folder.
+
+Then run the command : qsub non_interactive_mumax3
+
+This will automatically run the file and save the output files.
