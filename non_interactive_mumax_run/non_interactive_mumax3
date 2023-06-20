@@ -1,0 +1,18 @@
+# /bin/bash
+#PBS -N mumax3
+#PBS -l vnode=Landauer47
+#PBS -l ncpus=4
+#PBS -l ngpus=1
+#PBS -l mem=8gb
+#PBS -l walltime=48:00:00
+
+
+echo `date` && \
+module load pbspro golang && \
+module load pbspro singularity && \
+rsync -az $PBS_O_WORKDIR/ $TMPDIR/ && \
+cd $TMPDIR && \
+${SINGULARITY_ROOT}/bin/singularity exec --nv --app mumax3 /opt/containers/ubuntu/20/umag_tools_v8a.sif mumax3 -http="" -cache=/var/tmp -paranoid=false -failfast -f with_spacer_Initial_DW_creation.mx3 \
+1> >(tee ${PBS_O_WORKDIR}/${PBS_JOBID}.${PBS_JOBNAME}.out) 2> >(tee -a ${PBS_O_WORKDIR}/${PBS_JOBID}.${PBS_JOBNAME}.out) && \
+rsync -az $TMPDIR/ $PBS_O_WORKDIR/ && \
+echo `date`
