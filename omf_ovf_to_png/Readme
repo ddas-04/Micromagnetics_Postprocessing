@@ -1,4 +1,3 @@
-Go to the "omf_files" folder. 
 Put all your omf/ovf files here. Make sure the data in those files are saved in text format. For OOMMF the command is:  vector_field_output_format { text %.17g }. Write it inside Time-driver. For Mumax3 write: OutputFormat = OVF2_TEXT
 Change 'omf' to 'ovf' at line number 62: 'if fnmatch.fnmatch(file, '*.omf')', if you are using ovf files.
 Run the 'python_omf_to_png.py'
